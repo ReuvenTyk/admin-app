@@ -2,6 +2,7 @@ const { User } = require("../models/user");
 const joi = require("joi");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const config = require("../config/dev");
 
 module.exports = {
   login: async function (req, res, next) {

@@ -5,6 +5,8 @@ import Customers from "./components/Customers/Customers";
 import { Link, Route, Routes } from "react-router-dom";
 import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
+import LogOut from "./components/auth/Logout";
+import PrivateRouter from "./components/auth/PrivateRouter";
 
 function App() {
   return (
@@ -19,9 +21,17 @@ function App() {
         <Link to="/signup" className="btn btn-info m-2">
           sign up
         </Link>
+        <LogOut />
       </div>
       <Routes>
-        <Route path="/" element={<Customers />} />
+        <Route
+          path="/"
+          element={
+            <PrivateRouter>
+              <Customers />
+            </PrivateRouter>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
