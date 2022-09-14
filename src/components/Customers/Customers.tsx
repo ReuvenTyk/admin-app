@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { json } from "stream/consumers";
 
 interface Customer {
   id: string;
@@ -8,16 +9,16 @@ interface Customer {
 }
 
 function Customers() {
-  const data: Array<Customer> = [
-    {
-      id: "1",
-      name: "a",
-      city: "n",
-      phone: "03-5550000",
-    },
-  ];
+  const [customers, setCustomers] = useState<Array<Customer>>([]);
 
-  const [customers, setCustomers] = useState(data);
+  useEffect(() => {
+    fetch("http://localhost:3000/customers")
+      .then((res) => res.json())
+      .then((data) => {
+        setCustomers(data);
+      });
+  }, []);
+
   return (
     <>
       <h2>Customers</h2>
